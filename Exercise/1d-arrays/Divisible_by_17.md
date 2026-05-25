@@ -1,4 +1,4 @@
-# Lập danh sách thi đấu (kết hợp Map và Vector)
+# Chia hết cho 17
 &emsp;Cho mảng 1 chiều có N phần tử, hãy đếm số lượng cặp số a[i], a[j] với i, j khác nhau mà khi cộng lại sẽ chia hết cho 17. (Lưu ý: không dùng 2 vòng for vì sẽ bị TLE). <br>
 
 **Input Format** <br>
