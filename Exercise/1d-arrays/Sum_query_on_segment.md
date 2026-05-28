@@ -8,7 +8,7 @@ Dòng 3: Q (Số truy vấn cần thực hiện) <br>
 Q dòng còn lại: left và right cách nhau 1 khoảng trắng <br>
 
 **Output Format** <br>
-Tổng các phần tử từ chỉ số left đến chỉ số right <br>
+Q kết quả hiển thị trên từng dòng <br>
 
 **Constraints** <br>
 1 <= N,Q <= 10^6 <br>
