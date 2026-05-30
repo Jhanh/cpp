@@ -18,9 +18,9 @@ DFS (Depth-First Search): Code sau chỉ chạy khi đầu vào là danh sách c
 
 vector<vector<int>> adj; // lưu danh sách kề
 vector<bool> check; // mảng đánh dấu các đỉnh đã xét
+int v, e; // v: số đỉnh; e: số cạnh
 
 void input(){
-    int v, e; // v: số đỉnh; e: số cạnh
     cin >> v >> e;
     adj.assign(v+1, vector<int>());
     check.assign(v+1, false);
