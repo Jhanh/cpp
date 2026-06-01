@@ -12,8 +12,9 @@ G : Graph    : Đồ thị
 V : Vertices : Đỉnh
 E : Edge     : Cạnh
 */
+// Code chỉ chạy với đơn đồ thị vô hướng và input là danh sách cạnh
 /*
-BFS (Breadth-First Search): Code này chỉ hoạt động khi đầu vào là danh sách cạnh, duyệt qua tất cả các đỉnh bằng cách đi theo từng lớp từ gốc thông qua queue
+BFS (Breadth-First Search): Duyệt qua tất cả các đỉnh bằng cách đi theo từng lớp từ gốc thông qua queue
 */
 // Time complexity: O(V + E) nếu dùng danh sách kề
 // Space complexity: O(V + E)

@@ -15,6 +15,7 @@ G : Graph    : Đồ thị
 V : Vertices : Đỉnh
 E : Edge     : Cạnh
 */
+// Code chỉ chạy với đơn đồ thị vô hướng và input là danh sách cạnh
 // (Minimum Spanning Tree - MST): Cây khung có trọng số nhỏ nhất
 // Time complexity: O(E log(V))
 // Space complexity: O(V + E)

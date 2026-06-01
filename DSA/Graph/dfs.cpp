@@ -10,8 +10,9 @@ G : Graph    : Đồ thị
 V : Vertices : Đỉnh
 E : Edge     : Cạnh
 */
+// Code chỉ chạy với đơn đồ thị vô hướng và input là danh sách cạnh
 /*
-DFS (Depth-First Search): Code sau chỉ chạy khi đầu vào là danh sách cạnh, duyệt qua tất cả các đỉnh bằng cách đi sâu vào 1 nhánh theo đỉnh stack đến khi không còn đỉnh nào thì quay lui (đệ qui) để xét tiếp
+DFS (Depth-First Search): Duyệt qua tất cả các đỉnh bằng cách đi sâu vào 1 nhánh theo đỉnh stack đến khi không còn đỉnh nào thì quay lui (đệ qui) để xét tiếp
 */
 // Time complexity: O(V + E) nếu dùng danh sách kề
 // Space complexity: O(V + E)
