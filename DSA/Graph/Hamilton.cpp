@@ -10,6 +10,7 @@ G : Graph    : Đồ thị
 V : Vertices : Đỉnh
 E : Edge     : Cạnh
 */
+// Code chỉ chạy với đơn đồ thị vô hướng và input là danh sách cạnh
 // Hamilton : Đi qua mọi đỉnh (không lặp đỉnh, có thể không duyệt qua mọi cạnh)
 // Time complexity: O(V!)
 // Space complexity: O(V + E)

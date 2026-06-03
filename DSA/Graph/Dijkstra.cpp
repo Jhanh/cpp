@@ -15,6 +15,7 @@ G : Graph    : Đồ thị
 V : Vertices : Đỉnh
 E : Edge     : Cạnh
 */
+// Code chỉ chạy với đơn đồ thị vô hướng và input là danh sách cạnh
 // Time complexity: O((V + E) * log(V))
 // Space complexity: O(V + E)
 vector<vector<pair<int, int>>> adj; // danh sách kề lưu trữ {đỉnh kề, trọng số}
