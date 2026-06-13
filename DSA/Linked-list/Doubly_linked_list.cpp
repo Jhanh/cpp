@@ -1,23 +1,33 @@
 #include <iostream>
+#include <string>
 using std::cin;
 using std::cout;
+using std::string;
+
+struct payload{
+    int a, b;
+    string c, d;
+    double e, f;
+};
 
 struct node{
-    int data;
+    payload data;
     node *next;
     node *prev;
 };
 
-node *makeNode (int val);                      // Tạo node mới
-int size (node *head);                         // Kích thước danh sách liên kết
-void print (node *head);                       // In danh sách liên kết
-void insertHead(node *&head, int val);         // Thêm vào đầu
-void insertTail(node *&head, int val);         // Thêm vào cuối
-void insertMid(node *&head, int val, int pos); // Thêm vào giữa
-void deleteHead(node *&head);                  // Xóa đầu
-void deleteTail(node *&head);                  // Xóa cuối
-void deleteMid(node *&head, int pos);          // Xóa giữa
-void freeList(node *&head);                    // Giải phóng bộ nhớ
+payload input ();
+void output (payload x);
+node *makeNode (payload val);                      // Tạo node mới
+int size (node *head);                             // Kích thước danh sách liên kết
+void print (node *head);                           // In danh sách liên kết
+void insertHead(node *&head, payload val);         // Thêm vào đầu
+void insertTail(node *&head, payload val);         // Thêm vào cuối
+void insertMid(node *&head, payload val, int pos); // Thêm vào giữa
+void deleteHead(node *&head);                      // Xóa đầu
+void deleteTail(node *&head);                      // Xóa cuối
+void deleteMid(node *&head, int pos);              // Xóa giữa
+void freeList(node *&head);                        // Giải phóng bộ nhớ
 
 int main(){
     node *head = NULL;
@@ -30,30 +40,26 @@ int main(){
         cout << "5. Delete tail\n";
         cout << "6. Delete middle\n";
         cout << "7. Print\n";
-        cout << "8. END\n";
+        cout << "0. END\n";
 
         int choice;
         do{
             cin >> choice;
-            if (choice < 1 || choice > 8)  cout << "ERROR!";
-        } while (choice < 1 || choice > 8);
+            if (choice < 0 || choice > 7)  cout << "ERROR!\n";
+        } while (choice < 0 || choice > 7);
 
         if (choice == 1){
-            int value;
-            cout << "Enter value: ";
-            cin >> value;
+            payload value = input();
             insertHead(head, value);
         }
         else if (choice == 2){
-            int value;
-            cout << "Enter value: ";
-            cin >> value;
+            payload value = input();
             insertTail(head, value);
         }
         else if (choice == 3){
-            int value, position;
-            cout << "Enter value: ";    cin >> value;
+            int position;
             cout << "Enter position: "; cin >> position;
+            payload value = input();
             insertMid(head, value, position);
         }
         else if (choice == 4){
@@ -80,7 +86,20 @@ int main(){
     return 0;
 }
 
-node *makeNode(int val){
+payload input (){
+    payload x;
+    cin >> x.a >> x.b;
+    cin.ignore();
+    getline(cin, x.c);  getline(cin, x.d);
+    cin >> x.e >> x.f;
+    return x;
+}
+
+void output (payload x){
+    cout << x.a << x.b << x.c << x.d << x.e << x.f;
+}
+
+node *makeNode(payload val){
     node *newNode = new node;
     newNode->data = val;
     newNode->next = NULL;
@@ -104,13 +123,14 @@ void print (node *head){
     }
 
     while (head != NULL){
-        cout << head->data << ' ';
+        output(head->data);
+        cout << '\n';
         head = head->next;
     }
     cout << '\n';
 }
 
-void insertHead(node *&head, int val){
+void insertHead(node *&head, payload val){
     node *newNode = makeNode(val);
 
     if (head == NULL){ // nếu DSLK đôi rỗng
@@ -124,7 +144,7 @@ void insertHead(node *&head, int val){
     head = newNode; // chuyển head thành node mới
 }
 
-void insertTail(node *&head, int val){
+void insertTail(node *&head, payload val){
     node *newNode = makeNode(val);
 
     if (head == NULL){ // nếu DSLK đôi rỗng
@@ -141,7 +161,7 @@ void insertTail(node *&head, int val){
     newNode->prev = tmp; // node mới nối ngược vào node cuối
 }
 
-void insertMid(node *&head, int val, int pos){
+void insertMid(node *&head, payload val, int pos){
     int listSize = size(head);
     if (pos < 0 || pos > listSize){ // nếu vị trí cần chèn không tồn tại
         return;
@@ -239,4 +259,3 @@ void freeList(node *&head){
     }
     head = NULL;
 }
-

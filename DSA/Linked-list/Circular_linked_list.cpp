@@ -18,15 +18,15 @@ struct node{
 payload input ();
 void output (payload x);
 node *makeNode (payload val);                      // Tạo node mới
-int size (node *head);                             // Kích thước danh sách liên kết
-void print (node *head);                           // In danh sách liên kết
+int size (node *head);                         // Kích thước danh sách liên kết
+void print (node *head);                       // In danh sách liên kết
 void insertHead(node *&head, payload val);         // Thêm vào đầu
 void insertTail(node *&head, payload val);         // Thêm vào cuối
 void insertMid(node *&head, payload val, int pos); // Thêm vào giữa
-void deleteHead(node *&head);                      // Xóa đầu
-void deleteTail(node *&head);                      // Xóa cuối
-void deleteMid(node *&head, int pos);              // Xóa giữa
-void freeList(node *&head);                        // Giải phóng bộ nhớ
+void deleteHead(node *&head);                  // Xóa đầu
+void deleteTail(node *&head);                  // Xóa cuối
+void deleteMid(node *&head, int pos);          // Xóa giữa
+void freeList(node *&head);                    // Giải phóng bộ nhớ
 
 int main(){
     node *head = NULL;
@@ -106,11 +106,14 @@ node *makeNode(payload val){
 }
 
 int size (node *head){
+    if (head == NULL)  return 0;
+
     int cnt = 0;
-    while (head != NULL){
+    node *tmp = head;
+    do{
         ++cnt;
-        head = head->next;
-    }
+        tmp = tmp->next;
+    } while (tmp != head);
     return cnt;
 }
 
@@ -120,41 +123,50 @@ void print (node *head){
         return;
     }
 
-    while (head != NULL){
-        output(head->data);
+    node *tmp = head;
+    do{
+        output(tmp->data);
         cout << '\n';
-        head = head->next;
-    }
+        tmp = tmp->next;
+    } while (tmp != head);
     cout << '\n';
 }
 
 void insertHead(node *&head, payload val){
     node *newNode = makeNode(val);
 
-    if (head == NULL){ // nếu DSLK đơn rỗng
+    if (head == NULL){ // nếu DSLK vòng rỗng
         head = newNode;
+        newNode->next = head; // node mới tự nối vào chính nó
         return;
     }
 
-    // nếu DSLK đơn không rỗng
+    // nếu DSLK vòng không rỗng
+    node *tmp = head;
+    while (tmp->next != head){ // đi đến node cuối cùng
+        tmp = tmp->next;
+    }
     newNode->next = head; // node mới nối vào node đang đứng đầu
     head = newNode; // chuyển head thành node mới
+    tmp->next = newNode; // node cuối nối vào node mới (node đầu)
 }
 
 void insertTail(node *&head, payload val){
     node *newNode = makeNode(val);
 
-    if (head == NULL){ // nếu DSLK đơn rỗng
+    if (head == NULL){ // nếu DSLK vòng rỗng
         head = newNode;
+        newNode->next = head; // node mới tự nối vào chính nó
         return;
     }
 
-    // nếu DSLK đơn không rỗng
+    // nếu DSLK vòng không rỗng
     node *tmp = head;
-    while (tmp->next != NULL){ // Đi đến node cuối cùng
+    while (tmp->next != head){ // Đi đến node cuối cùng
         tmp = tmp->next;
     }
     tmp->next = newNode; // node cuối cùng nối vào node mới
+    newNode->next = head; // node mới nối vào node đầu
 }
 
 void insertMid(node *&head, payload val, int pos){
@@ -180,38 +192,50 @@ void insertMid(node *&head, payload val, int pos){
     }
     // Yêu cầu tuân theo đúng thứ tự sau:
     newNode->next = tmp->next; // node mới nối vào node sau node tmp
-    tmp->next = newNode; // node tmp nối vào node mới;
+    tmp->next = newNode; // node tmp nối vào node mới
 }
 
 void deleteHead(node *&head){
-    if (head == NULL){ // nếu DSLK đơn rỗng
+    if (head == NULL){ // nếu DSLK vòng rỗng
         cout << "EMPTY\n";
         return;
     }
 
+    if (head->next == head){  // nếu DSLK vòng có đúng 1 phần tử
+        delete head;
+        head = NULL;
+        return;
+    }
+
+    // Nếu DSLK vòng có nhiều hơn 1 phần tử
+    node *tmp = head;
+    while (tmp->next != head){
+        tmp = tmp->next;
+    }
     node *needDel = head;
     head = head->next; // chuyển head lên node kế bên
+    tmp->next = head;
     delete needDel;
 }
 
 void deleteTail(node *&head){
-    if (head == NULL){ // nếu DSLK đơn rỗng
+    if (head == NULL){ // nếu DSLK vòng rỗng
         cout << "EMPTY\n";
         return;
     }
 
-    if (head->next == NULL){ // nếu DSLK chỉ có duy nhất 1 phần tử
+    if (head->next == head){ // nếu DSLK chỉ có duy nhất 1 phần tử
         delete head;
         head = NULL;
         return;
     }
 
     node *tmp = head;
-    while (tmp->next->next != NULL){ // Đi đến node kế cuối
+    while (tmp->next->next != head){ // Đi đến node kế cuối
         tmp = tmp->next;
     }
     node *needDel = tmp->next;
-    tmp->next = NULL;
+    tmp->next = head; // nối node kế cuối vào node đầu
     delete needDel;
 }
 
@@ -242,10 +266,12 @@ void deleteMid(node *&head, int pos){
 void freeList(node *&head){
     if (head == NULL)  return;
 
-    while (head != NULL){
-        node *needDel = head;
-        head = head->next;
+    node *tmp = head->next;
+    while (tmp != head){
+        node *needDel = tmp;
+        tmp = tmp->next;
         delete needDel;
     }
+    delete head;
     head = NULL;
 }
