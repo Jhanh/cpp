@@ -64,17 +64,23 @@ string minVal(int n, int sum){
         int digit = min(9, sum);
         res[i] = digit + '0'; // Chuyển kiểu số nguyên về kiểu char
         sum -= digit;
+
+        if (sum == 0)  break; // Câu lệnh không ảnh hưởng đến kết quả
+        // Nhưng vì đã tạo sẵn chuỗi có n số 0 nên trừ hết sum thì dừng luôn để nhanh hơn
     }
     res[0] = (sum + 1) + '0'; // Số đầu tiên sẽ là phần còn lại của sum cộng thêm 1 đơn vị đã chừa lại ở trên
     return res;
 }
 
 string maxVal(int n, int sum){
-    string res = "";
+    string res(n, '0');
     for (int i = 0; i < n; i++){ // Duyệt từ đầu về cuối
         int digit = min(9, sum);
         res += (digit + '0');
         sum -= digit;
+
+        if (sum == 0)  break; // Câu lệnh không ảnh hưởng đến kết quả
+        // Nhưng vì đã tạo sẵn chuỗi có n số 0 nên trừ hết sum thì dừng luôn để nhanh hơn
     }
     return res;
 }
