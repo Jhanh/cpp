@@ -8,7 +8,7 @@ using std::sort;
 using std::max;
 
 /*
-Cách 1: Dùng mảng đếm tần suất. Cho 2 mảng đếm tần suất 2 mảng để cho, duyệt từ 0 đến giá trị lớn nhất của 2 mảng nếu xuất hiện ở một trong hai thì cho vào mảng hợp còn xuất hiện ở cả hai thì cho vào mảng giao.
+Cách 1: Dùng mảng đếm tần suất. Cho 2 mảng đếm tần suất 2 mảng đã cho, duyệt từ 0 đến giá trị lớn nhất của 2 mảng nếu xuất hiện ở một trong hai thì cho vào mảng hợp còn xuất hiện ở cả hai thì cho vào mảng giao.
 Ưu: Nhanh
 Nhược: Không dùng được nếu mảng có số âm hoặc quá lớn
 */
