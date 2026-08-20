@@ -12,9 +12,6 @@ void findPosition (char matr[5][5], char x, int &row, int &col); // Hàm phụ
 string encryptPlayfair (string text, char matr[5][5]); // Hàm chính
 
 int main(){
-    freopen ("input.txt", "r", stdin);
-    freopen ("output.txt", "a", stdout);
-
     char matrix[5][5];
     string key, text;
     getline(cin, key);
@@ -25,9 +22,7 @@ int main(){
     string formattedText = formatText(text);
     string res = encryptPlayfair(formattedText, matrix);
     cout << res << '\n';
-    cout << formattedText << '\n';
 
-    cout << '\n';
     return 0;
 }
 
@@ -78,7 +73,7 @@ string formatText (string text){
     string tmp = "";
 
     // Đổi J thành I và bỏ khoảng trắng
-    for (char &c : text){
+    for (char c : text){
         if (isalpha(c)){
             c = toupper(c); // Đảm bảo chữ cái in hoa để đồng bộ logic
             if (c == 'J')  c = 'I'; // Quy định J là I vì trong bảng ta mặc định I thay thế cho J
@@ -95,8 +90,7 @@ string formatText (string text){
             break;
         }
 
-        // Nếu 2 kí tự liên tiếp cùng cặp trùng nhau
-        if (tmp[i] == tmp[i+1]){
+        if (tmp[i] == tmp[i+1]){ // Nếu 2 kí tự liên tiếp cùng cặp trùng nhau
             res += 'X'; // Chèn X vào sau từ đầu tiên và đẩy từ thứ 2 bị trùng lùi về sau
         }
         else{ // Nếu không trùng thì ta ghép thành 1 cặp rồi nhảy đến cặp tiếp theo
